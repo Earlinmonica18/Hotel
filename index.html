@@ -3,62 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Voyago Advanced</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Voyago Travel</title>
 
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial;
 }
 
+/* BACKGROUND IMAGE */
 body {
-  background: linear-gradient(120deg, #4facfe, #00f2fe);
-  color: #fff;
-  min-height: 100vh;
+  background: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb") no-repeat center/cover;
+  color: white;
 }
 
 /* NAVBAR */
 nav {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 20px 60px;
-}
-
-nav h2 {
-  font-weight: 600;
+  padding: 20px 50px;
+  background: rgba(0,0,0,0.6);
 }
 
 nav ul {
   display: flex;
   list-style: none;
-  gap: 30px;
+  gap: 25px;
 }
 
 nav ul li {
   cursor: pointer;
-  transition: 0.3s;
 }
 
-nav ul li:hover {
-  color: #000;
-}
-
-.register-btn {
-  background: #fff;
-  color: #000;
-  padding: 8px 18px;
-  border-radius: 25px;
+nav button {
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: none;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-.register-btn:hover {
-  transform: scale(1.05);
 }
 
 /* HERO */
@@ -67,123 +50,38 @@ nav ul li:hover {
   padding: 80px 20px;
 }
 
-.hero h1 {
-  font-size: 45px;
-  margin-bottom: 15px;
-}
-
-.hero p {
-  max-width: 600px;
-  margin: auto;
-  opacity: 0.9;
-}
-
-/* BUTTONS */
-.buttons {
-  margin-top: 20px;
-}
-
-.buttons button {
-  padding: 10px 20px;
-  border-radius: 25px;
+.hero input {
+  padding: 10px;
+  width: 260px;
+  border-radius: 20px;
   border: none;
-  margin: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.buttons button:hover {
-  background: #000;
-  color: #fff;
-}
-
-/* SEARCH BAR */
-.search-box {
-  margin-top: 25px;
-}
-
-.search-box input {
-  padding: 12px 20px;
-  width: 300px;
-  border-radius: 25px;
-  border: none;
-  outline: none;
 }
 
 /* CARDS */
 .cards {
   display: flex;
-  gap: 25px;
   justify-content: center;
-  flex-wrap: wrap;
+  gap: 20px;
   padding: 40px;
+  flex-wrap: wrap;
 }
 
 .card {
-  width: 260px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
   padding: 15px;
-  border-radius: 20px;
-  backdrop-filter: blur(15px);
-  background: rgba(255,255,255,0.15);
-  transition: 0.4s;
-  position: relative;
+  border-radius: 15px;
+  width: 250px;
+  transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-10px);
+  transform: scale(1.05);
 }
 
 .card img {
   width: 100%;
-  border-radius: 15px;
-}
-
-.card h3 {
-  margin: 10px 0;
-}
-
-.features {
-  font-size: 12px;
-  opacity: 0.8;
-}
-
-.price {
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-/* RATING */
-.rating {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  background: #000;
-  padding: 4px 10px;
   border-radius: 10px;
-  font-size: 12px;
-}
-
-/* FOOTER */
-.footer {
-  text-align: center;
-  margin: 40px 0;
-  opacity: 0.8;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px) {
-  nav {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .hero h1 {
-    font-size: 30px;
-  }
-
-  .search-box input {
-    width: 90%;
-  }
 }
 </style>
 </head>
@@ -193,84 +91,84 @@ nav ul li:hover {
 <!-- NAVBAR -->
 <nav>
   <h2>Voyago</h2>
+
   <ul>
-    <li>Home</li>
-    <li>Vacation</li>
-    <li>Hotels</li>
-    <li>Car Rental</li>
+    <li onclick="navigate('home')">Home</li>
+    <li onclick="navigate('vacation')">Vacation</li>
+    <li onclick="navigate('hotels')">Hotels</li>
+    <li onclick="navigate('car')">Car Rental</li>
   </ul>
-  <div class="register-btn">Register</div>
+
+  <button onclick="registerUser()">Register</button>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <h1>Start Your Journey to Your Dream Destination</h1>
-  <p>Explore the world with comfort, book hotels easily and enjoy your vacation.</p>
+<section class="hero" id="home">
+  <h1>Start Your Journey</h1>
+  <p>Discover best hotels and travel experiences</p>
 
-  <div class="buttons">
-    <button onclick="filterCards('all')">All</button>
-    <button onclick="filterCards('cheap')">Budget</button>
-    <button onclick="filterCards('luxury')">Luxury</button>
-  </div>
-
-  <div class="search-box">
-    <input type="text" placeholder="Search hotels..." onkeyup="searchHotel(this.value)">
-  </div>
+  <input type="text" placeholder="Search hotels..." onkeyup="searchHotel(this.value)">
 </section>
 
-<!-- CARDS -->
-<section class="cards" id="cardContainer">
+<!-- HOTEL CARDS -->
+<section class="cards" id="hotels">
 
-  <div class="card" data-type="luxury">
-    <div class="rating">⭐ 4.7</div>
-    <img src="https://source.unsplash.com/300x200/?japan,temple">
+  <div class="card" data-name="sakura">
+    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb">
     <h3>Sakura Haven</h3>
-    <p class="features">Free WiFi • Spa • 4 Beds</p>
-    <div class="price">$180 / night</div>
+    <p>Free WiFi • Spa • 4 Beds</p>
+    <h4>$180 / night</h4>
   </div>
 
-  <div class="card" data-type="cheap">
-    <div class="rating">⭐ 4.5</div>
-    <img src="https://source.unsplash.com/300x200/?hotel">
+  <div class="card" data-name="kyoto">
+    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945">
     <h3>Kyoto Inn</h3>
-    <p class="features">Kitchen • 2 Beds</p>
-    <div class="price">$66 / night</div>
+    <p>Kitchen • 2 Beds</p>
+    <h4>$66 / night</h4>
   </div>
 
-  <div class="card" data-type="luxury">
-    <div class="rating">⭐ 4.8</div>
-    <img src="https://source.unsplash.com/300x200/?resort">
+  <div class="card" data-name="royal">
+    <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb2101f">
     <h3>Royal Stay</h3>
-    <p class="features">Pool • Restaurant</p>
-    <div class="price">$205 / night</div>
+    <p>Pool • Restaurant</p>
+    <h4>$205 / night</h4>
   </div>
 
 </section>
-
-<!-- FOOTER -->
-<div class="footer">
-  Booking.com • Airbnb • Expedia • Tripadvisor
-</div>
 
 <script>
-function filterCards(type) {
-  let cards = document.querySelectorAll(".card");
-
-  cards.forEach(card => {
-    if (type === "all") {
-      card.style.display = "block";
-    } else {
-      card.style.display = card.dataset.type === type ? "block" : "none";
-    }
-  });
+// NAVIGATION
+function navigate(section) {
+  if(section === "home") {
+    document.getElementById("home").scrollIntoView({behavior:"smooth"});
+  }
+  else if(section === "hotels") {
+    document.getElementById("hotels").scrollIntoView({behavior:"smooth"});
+  }
+  else {
+    alert(section + " page coming soon!");
+  }
 }
 
+// REGISTER
+function registerUser() {
+  let name = prompt("Enter your name:");
+  if(name) {
+    alert("Welcome " + name + " 🎉");
+  }
+}
+
+// SEARCH
 function searchHotel(value) {
   let cards = document.querySelectorAll(".card");
 
   cards.forEach(card => {
-    let title = card.querySelector("h3").innerText.toLowerCase();
-    card.style.display = title.includes(value.toLowerCase()) ? "block" : "none";
+    let name = card.dataset.name;
+    if(name.includes(value.toLowerCase())) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
   });
 }
 </script>
